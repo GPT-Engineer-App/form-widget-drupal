@@ -13,6 +13,7 @@ const DrupalFormWidget = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
+      console.log('Submitting form data:', formData);
       const response = await fetch('https://your-endpoint-url.com/submit', {
         method: 'POST',
         headers: {
@@ -20,6 +21,9 @@ const DrupalFormWidget = () => {
         },
         body: JSON.stringify(formData),
       });
+
+      console.log('Response status:', response.status);
+      console.log('Response data:', await response.text());
 
       if (response.ok) {
         toast({
@@ -34,6 +38,7 @@ const DrupalFormWidget = () => {
         throw new Error('Failed to submit form');
       }
     } catch (error) {
+      console.error('Submission error:', error);
       toast({
         title: 'Submission error.',
         description: 'There was an error submitting your message.',
